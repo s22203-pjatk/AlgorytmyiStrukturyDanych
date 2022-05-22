@@ -1,56 +1,36 @@
-import numpy
+import copy
 import time
 import sys
+import random
 
-sys.setrecursionlimit(10000)
-
-
-###############################################################
-def open_tab_random():
-    random_tab = numpy.random.randint(1, high=500, size=500000)
-    n = open('random_tab.txt', 'w')
-    n.write('{}'.format(random_tab))
-    n.close()
-    return random_tab
-
-
-def read_tab_random():
-    costam = open("random_tab.txt", "r")
-    print("Nowa tablica --> ", open_tab_random())
-    costam.close()
-    return open_tab_random()
-
+sys.setrecursionlimit(10**6)
 
 ###############################################################
-def open_tab_sort():
-    sort_tab = list(range(1, 500000))
-    n = open('sort_tab.txt', 'w')
-    n.write('{}'.format(sort_tab))
-    n.close()
-    return sort_tab
+random_tab = []
 
+for x in range(0, 500000):
+    random_tab.append(random.randint(0, 1000))
+n = open('random_tab.txt', 'w')
+n.write('{}'.format(random_tab))
+n.close()
 
-def read_tab_sort():
-    costam = open("sort_tab.txt", "r")
-    costam.close()
-    return open_tab_sort()
+random_tab_copy = copy.copy(random_tab)
+random_tab_copy_2 = copy.copy(random_tab)
+random_tab_copy_3 = copy.copy(random_tab)
 
+sort_tab = sorted(random_tab)
+n = open('sort_tab.txt', 'w')
+n.write('{}'.format(sort_tab))
+n.close()
 
-###############################################################
-def open_tab_resort():
-    resort_tab = []
-    for i in range(500000, 0, -1):
-        resort_tab.append(i)
-    n = open('resort_tab.txt', 'w')
-    n.write('{}'.format(resort_tab))
-    n.close()
-    return resort_tab
+resort_tab = sort_tab[::-1]
+n = open('resort_tab.txt', 'w')
+n.write('{}'.format(resort_tab))
+n.close()
 
-
-def read_tab_resort():
-    costam = open("resort_tab.txt", "r")
-    costam.close()
-    return open_tab_resort()
+resort_tab_copy = copy.copy(resort_tab)
+resort_tab_copy_2 = copy.copy(resort_tab)
+resort_tab_copy_3 = copy.copy(resort_tab)
 
 
 ###############################################################
@@ -135,73 +115,108 @@ def bubblesort(tab):
 ###############################################################
 ###############################################################
 ###############################################################
-###############################################################
+###############################################################111
+
 start_time = time.time()
-heapsort(read_tab_random())
+heapsort(random_tab)
 print("heapsort random %s sec" % (time.time() - start_time))
 start_time = 0
+
 ###############################################################
+print("\n")
+###############################################################
+
 start_time = time.time()
-heapsort(read_tab_sort())
+heapsort(sort_tab)
 print("heapsort sort %s sec" % (time.time() - start_time))
 start_time = 0
+
 ###############################################################
+print("\n")
+###############################################################
+
 start_time = time.time()
-heapsort(read_tab_resort())
+heapsort(resort_tab)
 print("heapsort resort %s sec" % (time.time() - start_time))
 start_time = 0
+
 ###############################################################
 ###############################################################
+print("\n\n\n")
 ###############################################################
-###############################################################
+###############################################################222
+
 start_time = time.time()
-mergesort(read_tab_random())
+mergesort(random_tab_copy)
 print("mergesort random %s sec" % (time.time() - start_time))
 start_time = 0
+
 ###############################################################
+print("\n")
+###############################################################
+
 start_time = time.time()
-mergesort(read_tab_sort())
+mergesort(sort_tab)
 print("mergesort sort %s sec" % (time.time() - start_time))
 start_time = 0
+
 ###############################################################
+print("\n")
+###############################################################
+
 start_time = time.time()
-mergesort(read_tab_resort())
+mergesort(resort_tab_copy)
 print("mergesort resort %s sec" % (time.time() - start_time))
 start_time = 0
+
 ###############################################################
 ###############################################################
+print("\n\n\n")
 ###############################################################
-###############################################################
+###############################################################333
+
 start_time = time.time()
-bubblesort(read_tab_random())
-print("bubblesort random %s sec" % (time.time() - start_time))
-start_time = 0
-###############################################################
-start_time = time.time()
-bubblesort(read_tab_sort())
-print("bubblesort sort %s sec" % (time.time() - start_time))
-start_time = 0
-###############################################################
-start_time = time.time()
-bubblesort(read_tab_resort())
-print("bubblesort resort %s sec" % (time.time() - start_time))
-start_time = 0
-###############################################################
-###############################################################
-###############################################################
-###############################################################
-start_time = time.time()
-quicksort(read_tab_random(), 0, 499999)
+quicksort(random_tab_copy_2, 0, len(random_tab) - 1)
 print("quicksort random %s sec" % (time.time() - start_time))
 start_time = 0
+
 ###############################################################
+print("\n")
+###############################################################
+print("quicksort sort --exit code -1073741571 (0xC00000FD)--")
+print("quicksort resort --exit code -1073741571 (0xC00000FD)--")
+###############################################################
+###############################################################
+print("\n\n")
+###############################################################
+###############################################################444
+
+
 start_time = time.time()
-quicksort(read_tab_sort(), 0, 499999)
-print("quicksort sort %s sec" % (time.time() - start_time))
+bubblesort(random_tab_copy_3)
+print("bubblesort random %s sec" % (time.time() - start_time))
 start_time = 0
+
+
 ###############################################################
+print("\n")
+###############################################################
+
+
 start_time = time.time()
-quicksort(read_tab_resort(), 0, 499999)
-print("quicksort resort %s sec" % (time.time() - start_time))
+bubblesort(sort_tab)
+print("bubblesort sort %s sec" % (time.time() - start_time))
 start_time = 0
+
+
 ###############################################################
+print("\n")
+###############################################################
+
+
+start_time = time.time()
+bubblesort(resort_tab_copy_3)
+print("bubblesort resort %s sec" % (time.time() - start_time))
+start_time = 0
+
+
